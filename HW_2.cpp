@@ -6,6 +6,10 @@
 #include <map>
 #include <string>
 #include <random>
+#include "Plane.h"
+#include "Plane.cpp"
+#include "Airplane.h"
+#include "Airplane.cpp"
 
 using namespace std;
 
@@ -16,7 +20,7 @@ using namespace std;
 	}
 };*/
 
-class Plane {
+/*class Plane {
 protected:
 	double wait_time;
 private:
@@ -110,12 +114,12 @@ public:
 				return 0;
 			}
 		}
-	}*/
+	}
 
 	//New distance_to_SCE function for problem 3
 	double distance_to_SCE() {
-		if (destination == "SCE") {
-			double diff = distance - pos;
+		if (Plane::destination == "SCE") {
+			double diff = distance - Plane::pos;
 			if (diff < 0) diff = 0;
 			return diff;
 		}
@@ -138,8 +142,8 @@ public:
 		normal_distribution<double> d{ mean, standard_deviation };
 		return d(gen);
 	}
-};
-class Airliner : public Plane { //making inherited class public to draw from public members defined in question 2
+};*/
+/*class Airliner : public Plane { //making inherited class public to draw from public members defined in question 2
 private:
 	string Airline;
 public:
@@ -156,9 +160,9 @@ public:
 	virtual double time_on_ground() override {
 		return draw_from_normal_dist(1800, 600);
 	}
-};
+};*/
 
-class GeneralAviation : public Plane {
+/*class GeneralAviation : public Plane {
 public:
 	//Constructor
 	GeneralAviation(const string& from, const string& to) : Plane(from, to) {}
@@ -169,7 +173,7 @@ public:
 	virtual double time_on_ground() override {
 		return draw_from_normal_dist(600, 60);
 	}
-};
+};*/
 
 int main()
 {

@@ -12,7 +12,7 @@ endif()
 project ("HW_2")
 
 # Add source to this project's executable.
-add_executable (HW_2 "HW_2.cpp" "HW_2.h")
+add_executable (HW_2 "HW_2.cpp" "HW_2.h" "Plane.h" "Plane.cpp" "Airplane.h" "Airplane.cpp" "GeneralAviation.h" "GeneralAviation.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET HW_2 PROPERTY CXX_STANDARD 20)
