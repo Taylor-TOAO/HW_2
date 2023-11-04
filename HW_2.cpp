@@ -35,12 +35,12 @@ public:
 		}
 		else {
 			std::cerr << "Error: Flight distance not found for " << from << " to " << to << std::endl;
-			distance = 0.0; // Set a default value or handle the error as needed.
+			distance = 0; // Set a default value or handle the error as needed.
 		}
 
-		pos = 0.0;
-		vel = 0.0;
-		loiter_time = 0.0;
+		pos = 0;
+		vel = 0;
+		loiter_time = 0;
 		at_SCE = true;
 	}
 
@@ -63,7 +63,7 @@ public:
 		}
 		else {
 			swap(origin, destination);
-			pos = 0.0;
+			pos = 0;
 		}
 
 	}
@@ -97,7 +97,7 @@ public:
 	//Original distance_to_SCE function from problem 2
 	/*double distance_to_SCE() {
 		if (at_SCE) {
-			return 0.0;
+			return 0;
 		}
 		else {
 			//Using Question 1 to calculate the distance to SCE.
@@ -107,7 +107,7 @@ public:
 			}
 			else {
 				//Handles the case where the distance is not found.
-				return 0.0;
+				return 0;
 			}
 		}
 	}*/
@@ -116,19 +116,19 @@ public:
 	double distance_to_SCE() {
 		if (destination == "SCE") {
 			double diff = distance - pos;
-			if (diff < 0.0) diff = 0.0;
+			if (diff < 0) diff = 0;
 			return diff;
 		}
 		else {
-			return 0.0;
+			return 0;
 		}
 	}
 
 	virtual double time_on_ground() {
-		return 0.0;
+		return 0;
 	}
 	virtual string plane_type() {
-		return "GA";
+		return "GA";//Returns General Aviation
 	}
 
 	//Random number generator returning a random number from a normal distribution
@@ -137,6 +137,37 @@ public:
 		mt19937 gen{ rd() };
 		normal_distribution<double> d{ mean, standard_deviation };
 		return d(gen);
+	}
+};
+class Airliner : public Plane { //making inherited class public to draw from public members defined in question 2
+private:
+	string Airline;
+public:
+	//Constructor
+	Airliner(const string& Airline, const string& from, const string& to) : Airline(Airline), Plane(from, to)  {}
+
+	//Virtual deconstructor
+	virtual ~Airliner() {}
+
+	virtual string plane_type() override {
+		return Airline;
+	}
+
+	virtual double time_on_ground() override {
+		return draw_from_normal_dist(1800, 600);
+	}
+};
+
+class GeneralAviation : public Plane {
+public:
+	//Constructor
+	GeneralAviation(const string& from, const string& to) : Plane(from, to) {}
+
+	//Virtual deconstructor
+	virtual ~GeneralAviation() {}
+
+	virtual double time_on_ground() override {
+		return draw_from_normal_dist(600, 60);
 	}
 };
 
