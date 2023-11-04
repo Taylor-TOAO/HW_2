@@ -1,8 +1,8 @@
-#include <iostream>
+/*#include <iostream>
 #include <map>
 #include <string>
 #include <random>
-#include "Plane.h"
+//#include "Plane.h"
 
 using namespace std;
 
@@ -100,7 +100,7 @@ public:
 				return 0;
 			}
 		}
-	}*/
+	}
 
 	//New distance_to_SCE function for problem 3
 	double distance_to_SCE() {
@@ -128,4 +128,4 @@ public:
 		normal_distribution<double> d{ mean, standard_deviation };
 		return d(gen);
 	}
-};
+};*/

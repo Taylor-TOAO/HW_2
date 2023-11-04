@@ -1,4 +1,4 @@
-#ifndef PLANE_H
+/*#ifndef PLANE_H
 #define PLANE_H
 
 #include <iostream>
@@ -43,4 +43,4 @@ public:
 
 };
 
-#endif
+#endif*/
