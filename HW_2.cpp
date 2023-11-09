@@ -1,5 +1,4 @@
 ﻿// HW_2.cpp : Defines the entry point for the application.
-//
 
 #include "HW_2.h"
 #include <iostream>
@@ -8,29 +7,21 @@
 #include <random>
 #include <chrono>
 #include <thread>
-<<<<<<< HEAD
-#include "HW2_Visualizer.h"
+#include <vector>
+#include "HW2_Visualizer.h" //Question 8
 #include "Plane.h"
-//#include "Airplane.h"
-//#include "GeneralAviation.h"
-=======
-//#include "Plane.h"
-//#include "Plane.cpp"
-//#include "Airplane.h"
-//#include "Airplane.cpp"
-//#include "GeneralAviation.h"
-//#include "GeneralAviation.cpp"
->>>>>>> eae9f8df792054fc577ef7f546dda9eb33ed3da9
+
 
 using namespace std;
 
-//Making distnace map in main() backwards compatible (turns out, not necessary)
+//Making distance map in main() backwards compatible (turns out, not necessary)
 /*struct AirportLocator {
 	bool operator() (const pair <string, string>& a, const pair<string, string>& b) const {
 		return a.first < b.first || (a.first == b.first && a.second < b.second);
 	}
 };*/
 
+//Question 2 and 3
 class Plane {
 protected:
 	double wait_time;
@@ -43,13 +34,12 @@ public:
 	//Constructor
 	Plane(const string& from, const string& to) : origin(from), destination(to) {
 		
-		pair<string, string> airportpair = make_pair(origin, destination);//not sure if origin, destination is inside argument or from/to
+		pair<string, string> airportpair = make_pair(origin, destination);
 		Flight_Distance[make_pair("SCE", "PHL")] = 160;
 		Flight_Distance[make_pair("SCE", "ORD")] = 640;
 		Flight_Distance[make_pair("SCE", "EWR")] = 220;
 		distance = Flight_Distance[airportpair];
-		
-
+	
 		pos = 0;
 		vel = 0;
 		loiter_time = 0;
@@ -60,6 +50,7 @@ public:
 	//Virtual deconstructor
 	virtual ~Plane() {}
 	
+	//Flowchart Question 3
 	void operate(double dt) {
 		
 		if (loiter_time != 0) {
@@ -121,29 +112,11 @@ public:
 		loiter_time = newLoiterTime;
 	}
 
-	void setWaitTime(double newWaitTime) { //wasn't included but I am pretty sure it is needed
+	void setWaitTime(double newWaitTime) { 
 		wait_time = newWaitTime;
 	}
 		
-	//Original distance_to_SCE function from problem 2
-	/*double distance_to_SCE() {
-		if (at_SCE) {
-			return 0;
-		}
-		else {
-			//Using Question 1 to calculate the distance to SCE.
-			auto it = Flight_Distance.find(make_pair(origin, "SCE"));
-			if (it != Flight_Distance.end()) {
-				return it->second;
-			}
-			else {
-				//Handles the case where the distance is not found.
-				return 0;
-			}
-		}
-	}*/
 
-	//New distance_to_SCE function for problem 3
 	double distance_to_SCE() {
 		if (Plane::destination == "SCE") {
 			double diff = distance - Plane::pos;
@@ -159,10 +132,10 @@ public:
 		return 0;
 	}
 	virtual string plane_type() {
-		return "GA";//Returns General Aviation
+		return "GA";
 	}
 
-	//Random number generator returning a random number from a normal distribution
+	//Random number generator returning a random number from a normal distribution Question3 
 	static double draw_from_normal_dist(double mean, double standard_deviation) {
 		random_device rd;
 		mt19937 gen{ rd() };
@@ -170,6 +143,8 @@ public:
 		return d(gen);
 	}
 };
+
+//Question 4
 class Airliner : public Plane { //making inherited class public to draw from public members defined in question 2
 private:
 	string Airline;
@@ -189,6 +164,7 @@ public:
 	}
 };
 
+//Question 4
 class GeneralAviation : public Plane {
 public:
 	//Constructor
@@ -201,9 +177,8 @@ public:
 		return draw_from_normal_dist(600, 60);
 	}
 };
-<<<<<<< HEAD
-=======
 
+//Question 6
 class ATC {
 private:
 	vector<Plane*> registered_planes;
@@ -226,50 +201,7 @@ public:
 		int landed_planes = 0;
 		int i = 0;
 
-		//Stuck here on flowchart in Question 6
-		/*
-		while (i < registered_planes.size())
-		{
-			landed_planes += registered_planes[i]->at_SCE;
-			i++;
-		}
-		if (landed_planes >= MAX_LANDED_PLANE_NUM)
-		{
-			i = 0;
-			if (i < registered_planes.size())
-				for()
-		}
-		else if
-			break;*/
-	}
-};
-	
->>>>>>> eae9f8df792054fc577ef7f546dda9eb33ed3da9
-
-class ATC {
-private:
-	vector<Plane*> registered_planes;
-	const int MAX_LANDED_PLANE_NUM = 2;
-	const int AIRSPACE_DISTANCE = 50;
-
-public:
-	//Constructor
-	ATC() : MAX_LANDED_PLANE_NUM(2), AIRSPACE_DISTANCE(50) {}
-
-	//Deconstructor
-	~ATC() {}
-
-	void register_plane(Plane& plane) {
-		registered_planes.push_back(&plane);
-	}
-
-	//Air traffic control function
-	void control_traffic() {
-		int landed_planes = 0;
-		int i = 0;
-
-		//Stuck here on flowchart in Question 6
-		
+		//Flowchart Question 6		
 		while (i < registered_planes.size())
 		{
 			landed_planes += registered_planes[i]->getat_SCE();
@@ -286,31 +218,22 @@ public:
 						plane->setLoiterTime(100);
 					}
 				}
-
-
-		}
-		
+		}		
 	}
 };
 	
-
-int main(int argc, char** argv)
+int main(int argc, char** argv)//Question 8
 {
-	HW2_VIZ viz;
+	//Question 8/
+	HW2_VIZ viz;	
 	
-	
-	
-	//Container to for flight distance storage
+	//Container for flight distance storage Question 1
 	map<pair<string, string>, int> Flight_Distance;
 	
-	//Defining flight distances
+	//Defining flight distances Question 1
 	Flight_Distance[make_pair("SCE", "PHL")] = 160;//miles
 	Flight_Distance[make_pair("SCE", "ORD")] = 640;//miles
 	Flight_Distance[make_pair("SCE", "EWR")] = 220;//miles
-	//Flight_Distance[make_pair("PHL", "SCE")] = 160;//miles
-	//Flight_Distance[make_pair("ORD", "SCE")] = 640;//miles
-	//Flight_Distance[make_pair("EWR", "SCE")] = 220;//miles
-
 	
 	//User input for test, Problem 1
 	/*cout << "Please input the desired starting desitination: " << endl;
@@ -346,46 +269,8 @@ int main(int argc, char** argv)
 	GeneralAviation GA1("SCE", "PHL");
 	GeneralAviation GA2("SCE", "EWR");
 	GeneralAviation GA3("SCE", "ORD");
-<<<<<<< HEAD
 
-	//Set the speed of each airplane according to the table
-	AA1.setVel(470);
-	AA2.setVel(500);
-	UA1.setVel(515);
-	UA2.setVel(480);
-	GA1.setVel(140);
-	GA2.setVel(160);
-	GA3.setVel(180);
-
-	/*AA1.setLoiterTime(0);
-	AA2.setLoiterTime(0);
-	UA1.setLoiterTime(0);
-	UA2.setLoiterTime(0);
-	GA1.setLoiterTime(0);
-	GA2.setLoiterTime(0);
-	GA3.setLoiterTime(0);
-
-	AA1.setWaitTime(0);
-	AA2.setWaitTime(0);
-	UA1.setWaitTime(0);
-	UA2.setWaitTime(0);
-	GA1.setWaitTime(0);
-	GA2.setWaitTime(0);
-	GA3.setWaitTime(0);*/
-
-	ATC atc;
-
-	atc.register_plane(AA1);
-	atc.register_plane(AA2);
-	atc.register_plane(UA1);
-	atc.register_plane(UA2);
-	atc.register_plane(GA1);
-	atc.register_plane(GA2);
-	atc.register_plane(GA3);
-=======
->>>>>>> eae9f8df792054fc577ef7f546dda9eb33ed3da9
-
-	//Set the speed of each airplane according to the table
+	//Set the speed of each airplane according to the table Question 5
 	AA1.setVel(470);
 	AA2.setVel(500);
 	UA1.setVel(515);
@@ -409,37 +294,20 @@ int main(int argc, char** argv)
 	GA1.setWaitTime(0);
 	GA2.setWaitTime(0);
 	GA3.setWaitTime(0);
+
+	//Question 7
+	ATC atc;
+	atc.register_plane(AA1);
+	atc.register_plane(AA2);
+	atc.register_plane(UA1);
+	atc.register_plane(UA2);
+	atc.register_plane(GA1);
+	atc.register_plane(GA2);
+	atc.register_plane(GA3);
+
+	double timeStep = 10;
 	
-
-	double timeStep = 0.3;
-
-	while (true) {
-		
-		AA1.operate(timeStep);
-		AA2.operate(timeStep);
-		UA1.operate(timeStep);
-		UA2.operate(timeStep);
-		GA1.operate(timeStep);
-		GA2.operate(timeStep);
-		GA3.operate(timeStep);
-
-		//Positions of all airplanes at each time step
-		cout << "AA1 Position: " << AA1.getpos() << " miles" << endl;
-		cout << "AA2 Position: " << AA2.getpos() << " miles" << endl;
-		cout << "UA1 Position: " << UA1.getpos() << " miles" << endl;
-		cout << "UA2 Position: " << UA2.getpos() << " miles" << endl;
-		cout << "GA1 Position: " << GA1.getpos() << " miles" << endl;
-		cout << "GA2 Position: " << GA2.getpos() << " miles" << endl;
-		cout << "GA3 Position: " << GA3.getpos() << " miles" << endl;
-
-		//Pauser
-		this_thread::sleep_for(chrono::milliseconds(1000));
-	}
-
-	
-
-	double timeStep = 0.3;
-
+	//Question 5 and 7
 	while (true) {
 		
 		AA1.operate(timeStep);;
@@ -450,9 +318,10 @@ int main(int argc, char** argv)
 		GA2.operate(timeStep);
 		GA3.operate(timeStep);
 
+		//Question 7
 		atc.control_traffic();
 
-
+		//Question 8
 		viz.visualize_plane(AA1.plane_type(), AA1.getorigin(), AA1.getdestination(), AA1.getpos());
 
 		//Positions of all airplanes at each time step
@@ -467,19 +336,9 @@ int main(int argc, char** argv)
 		//Pauser
 		//this_thread::sleep_for(chrono::milliseconds(1000));
 
+		//Question 8
 		viz.update(10);
 	}
-
-	
-
-	//Testing conditions for Question 1
-	/*if (Flight_Distance.find(make_pair(Start_Airport, Destination)) != Flight_Distance.end()) {
-		int distance = Flight_Distance[make_pair(Start_Airport, Destination)];
-		cout << "The flight distance between " << Start_Airport << " and " << Destination << " is " << distance << " miles." << endl;
-	}
-	else {
-		cout << "Flight distance unknown." << endl;
-	}*/
 
 	return 0;
 }
