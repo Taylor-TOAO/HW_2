@@ -1,4 +1,4 @@
-#include "HW_2.h"
+/*#include "HW_2.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -23,4 +23,4 @@ public:
 	virtual double time_on_ground() override {
 		return draw_from_normal_dist(600, 60);
 	}
-};
+};*/

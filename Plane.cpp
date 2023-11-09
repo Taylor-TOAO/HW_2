@@ -1,8 +1,8 @@
-#include <iostream>
+/*#include <iostream>
 #include <map>
 #include <string>
 #include <random>
-#include "Plane.h"
+//#include "Plane.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ public:
 			distance = it->second;
 		}
 		else {
-			std::cerr << "Error: Flight distance not found for " << from << " to " << to << std::endl;
+			std::cerr << "Error: Flight distance not found for " << from << " to " << to << endl;
 			distance = 0; // Set a default value or handle the error as needed.
 		}
 
@@ -91,16 +91,16 @@ public:
 		}
 		else {
 			//Using Question 1 to calculate the distance to SCE.
-			auto it = Flight_Distance.find(std::make_pair(origin, "SCE"));
+			auto it = Flight_Distance.find(make_pair(origin, "SCE"));
 			if (it != Flight_Distance.end()) {
 				return it->second;
 			}
 			else {
-				//Handles the case where the distance is not found.
+				//Instance where distance is not found.
 				return 0;
 			}
 		}
-	}*/
+	}
 
 	//New distance_to_SCE function for problem 3
 	double distance_to_SCE() {
@@ -128,4 +128,4 @@ public:
 		normal_distribution<double> d{ mean, standard_deviation };
 		return d(gen);
 	}
-};
+};*/

@@ -1,8 +1,9 @@
-#include <iostream>
+/*#include <iostream>
 #include <map>
 #include <string>
 #include <random>
 #include "Plane.h"
+#include "Plane.cpp"
 #include "Airplane.h"
 #include "GeneralAviation.h"
 #include "GeneralAviation.cpp"
@@ -26,4 +27,4 @@ public:
 	virtual double time_on_ground() override {
 		return draw_from_normal_dist(1800, 600);
 	}
-};
+};*/

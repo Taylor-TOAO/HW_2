@@ -1,5 +1,5 @@
-#ifndef PLANE_H
-#define PLANE_H
+/*/#ifndef GENERALAVIATION_H
+#define GENERALAVIATION_H
 
 #include <iostream>
 #include <map>
@@ -20,7 +20,7 @@ public:
 	virtual ~GeneralAviation() {}
 
 	virtual double time_on_ground(double m, double sd);
-	}
+	
 };
 
-#endif
+#endif*/

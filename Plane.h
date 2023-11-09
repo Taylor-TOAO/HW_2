@@ -1,4 +1,4 @@
-#ifndef PLANE_H
+/*#ifndef PLANE_H
 #define PLANE_H
 
 #include <iostream>
@@ -17,11 +17,11 @@ private:
     double distance;
     double loiter_time;
     bool at_SCE;
-    std::string origin;
-    std::string destination;
+    string origin;
+    string destination;
 public:
     //Constructor
-    Plane(const std::string& from, const std::string& to);
+    Plane(const string& from, const string& to);
 
     //Virtual deconstructor
     virtual ~Plane();
@@ -31,16 +31,16 @@ public:
     double getPos() const;
     double getVel() const;
     double getLoiterTime() const;
-    std::string getOrigin() const;
-    std::string getDestination() const;
+    string getOrigin() const;
+    string getDestination() const;
     bool getAtSCE() const;
     void setVel(double newVel);
     void setLoiterTime(double newLoiterTime);
     double distance_to_SCE();
     virtual double time_on_ground();
-    virtual std::string plane_type();
+    virtual string plane_type();
     static double draw_from_normal_dist(double m, double sd);
 
 };
 
-#endif
+#endif*/

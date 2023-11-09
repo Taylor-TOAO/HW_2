@@ -1,4 +1,4 @@
-#ifndef AIRPLANE_H
+/*#ifndef AIRPLANEH
 #define AIRPLANE_H
 
 #include <iostream>
@@ -6,6 +6,7 @@
 #include <string>
 #include <random>
 #include "Plane.h"
+#include "Plane.cpp"
 
 using namespace std;
 
@@ -26,4 +27,4 @@ public:
 	
 };
 
-#endif
+#endif*/
