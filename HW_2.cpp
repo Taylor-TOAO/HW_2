@@ -8,10 +8,19 @@
 #include <random>
 #include <chrono>
 #include <thread>
+<<<<<<< HEAD
 #include "HW2_Visualizer.h"
 #include "Plane.h"
 //#include "Airplane.h"
 //#include "GeneralAviation.h"
+=======
+//#include "Plane.h"
+//#include "Plane.cpp"
+//#include "Airplane.h"
+//#include "Airplane.cpp"
+//#include "GeneralAviation.h"
+//#include "GeneralAviation.cpp"
+>>>>>>> eae9f8df792054fc577ef7f546dda9eb33ed3da9
 
 using namespace std;
 
@@ -192,6 +201,50 @@ public:
 		return draw_from_normal_dist(600, 60);
 	}
 };
+<<<<<<< HEAD
+=======
+
+class ATC {
+private:
+	vector<Plane*> registered_planes;
+	const int MAX_LANDED_PLANE_NUM = 2;
+	const int AIRSPACE_DISTANCE = 50;
+
+public:
+	//Constructor
+	ATC() : MAX_LANDED_PLANE_NUM(2), AIRSPACE_DISTANCE(50) {}
+
+	//Deconstructor
+	~ATC() {}
+
+	void register_plane(Plane& plane) {
+		registered_planes.push_back(&plane);
+	}
+
+	//Air traffic control function
+	void control_traffic() {
+		int landed_planes = 0;
+		int i = 0;
+
+		//Stuck here on flowchart in Question 6
+		/*
+		while (i < registered_planes.size())
+		{
+			landed_planes += registered_planes[i]->at_SCE;
+			i++;
+		}
+		if (landed_planes >= MAX_LANDED_PLANE_NUM)
+		{
+			i = 0;
+			if (i < registered_planes.size())
+				for()
+		}
+		else if
+			break;*/
+	}
+};
+	
+>>>>>>> eae9f8df792054fc577ef7f546dda9eb33ed3da9
 
 class ATC {
 private:
@@ -293,6 +346,7 @@ int main(int argc, char** argv)
 	GeneralAviation GA1("SCE", "PHL");
 	GeneralAviation GA2("SCE", "EWR");
 	GeneralAviation GA3("SCE", "ORD");
+<<<<<<< HEAD
 
 	//Set the speed of each airplane according to the table
 	AA1.setVel(470);
@@ -328,7 +382,59 @@ int main(int argc, char** argv)
 	atc.register_plane(GA1);
 	atc.register_plane(GA2);
 	atc.register_plane(GA3);
+=======
+>>>>>>> eae9f8df792054fc577ef7f546dda9eb33ed3da9
 
+	//Set the speed of each airplane according to the table
+	AA1.setVel(470);
+	AA2.setVel(500);
+	UA1.setVel(515);
+	UA2.setVel(480);
+	GA1.setVel(140);
+	GA2.setVel(160);
+	GA3.setVel(180);
+
+	AA1.setLoiterTime(0);
+	AA2.setLoiterTime(0);
+	UA1.setLoiterTime(0);
+	UA2.setLoiterTime(0);
+	GA1.setLoiterTime(0);
+	GA2.setLoiterTime(0);
+	GA3.setLoiterTime(0);
+
+	AA1.setWaitTime(0);
+	AA2.setWaitTime(0);
+	UA1.setWaitTime(0);
+	UA2.setWaitTime(0);
+	GA1.setWaitTime(0);
+	GA2.setWaitTime(0);
+	GA3.setWaitTime(0);
+	
+
+	double timeStep = 0.3;
+
+	while (true) {
+		
+		AA1.operate(timeStep);
+		AA2.operate(timeStep);
+		UA1.operate(timeStep);
+		UA2.operate(timeStep);
+		GA1.operate(timeStep);
+		GA2.operate(timeStep);
+		GA3.operate(timeStep);
+
+		//Positions of all airplanes at each time step
+		cout << "AA1 Position: " << AA1.getpos() << " miles" << endl;
+		cout << "AA2 Position: " << AA2.getpos() << " miles" << endl;
+		cout << "UA1 Position: " << UA1.getpos() << " miles" << endl;
+		cout << "UA2 Position: " << UA2.getpos() << " miles" << endl;
+		cout << "GA1 Position: " << GA1.getpos() << " miles" << endl;
+		cout << "GA2 Position: " << GA2.getpos() << " miles" << endl;
+		cout << "GA3 Position: " << GA3.getpos() << " miles" << endl;
+
+		//Pauser
+		this_thread::sleep_for(chrono::milliseconds(1000));
+	}
 
 	
 
